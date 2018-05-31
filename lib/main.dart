@@ -29,14 +29,14 @@ class MyApp extends StatelessWidget {
 
               if (snapshot.hasData) {
                 //获取到真实的数据
-              return  new ListView(
+              return  /*new ListView(
                   children: <Widget>[
                     new Text("标题"+snapshot.data.title),
                     new Text("内容"+snapshot.data.body),
                   ],
                 );
-
-                // new InitView(snapshot.data);
+*/
+                 new InitView(snapshot.data);
               } else if (snapshot.hasError) {
                 //获取数据失败
                 return new Text("${snapshot.error}");
@@ -65,8 +65,10 @@ class InitView  extends StatelessWidget{
       body: new ListView(
         children: <Widget>[
 
-          new Text("标题"+data.title),
-          new Text("内容"+data.body),
+          new Text("状态码"+data.error_code.toString()),
+          new Text("状态信息"+data.reason),
+          new Text("数据集合："+data.result.toString()),
+
         ],
       ),
 
@@ -75,29 +77,45 @@ class InitView  extends StatelessWidget{
 
 
 }
+final String urlPath="http://api.juheapi.com/japi/toh?key=8adb5f3b5ff1ff5631254bce266ab1b7&v=1.0&month=11&day=1";
 //取出post请求
 Future<Post> fetchPost() async {
   final response =
-  await http.get('https://jsonplaceholder.typicode.com/posts/1');
+  await http.get(urlPath);
   final responseJson = json.decode(response.body);
 
   return new Post.fromJson(responseJson);
 }
-//post bean
+// bean
 class Post {
-  final int userId;
-  final int id;
-  final String title;
-  final String body;
+  final int error_code;
+  final String reason;
+  final List result;
 
-  Post({this.userId, this.id, this.title, this.body});
+
+  Post({this.error_code, this.reason, this.result});
 
   factory Post.fromJson(Map<String, dynamic> json) {
     return new Post(
-      userId: json['userId'],
-      id: json['id'],
-      title: json['title'],
-      body: json['body'],
+      error_code: json['error_code'],
+      reason: json['reason'],
+      result: json['result'],
     );
   }
+
+}
+
+class TodayBean {
+  final String id;
+  final int day;
+  final String des;
+  final String lunar;
+  final int month;
+  final String pic;
+  final String title;
+  final int year;
+
+  TodayBean(this.id, this.day, this.des, this.lunar, this.month, this.pic, this.title, this.year);
+
+
 }
