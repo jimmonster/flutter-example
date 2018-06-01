@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_net/net/network.dart';
+import 'package:flutter_net/tabs/first.dart';
 import 'package:flutter_net/tabs/five.dart';
 import 'package:flutter_net/tabs/four.dart';
 import 'package:flutter_net/tabs/second.dart';
 import 'package:flutter_net/tabs/third.dart';
 
 void main() {
-
-  runApp(new MaterialApp(
+  runApp(MaterialApp(
     // Title
       title: "Using Tabs",
       // Home
-      home: new MyHome()));
+      home: MyHome()));
 }
 
 class MyHome extends StatefulWidget {
   @override
-  MyHomeState createState() => new MyHomeState();
+  MyHomeState createState() => MyHomeState();
 }
 
 // SingleTickerProviderStateMixin is used for animation
@@ -38,7 +38,7 @@ class MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin {
      * @param vsync  垂直同步
      */
     // Initialize the Tab Controller
-    controller = new TabController(initialIndex:0,length: 5, vsync: this);
+    controller = TabController(initialIndex: 0, length: 5, vsync: this);
   }
 
   @override
@@ -50,21 +50,22 @@ class MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       // Appbar 标题栏
-    /*  appBar: new AppBar(
+      /*  appBar:  AppBar(
         // Title
-        title: new Text("标题栏"),
+        title:  Text("标题栏"),
 
         // Set the background color of the App Bar
         backgroundColor: Colors.orange,
       ),*/
       // Set the TabBar view as the body of the Scaffold
 
-      body: new TabBarView(
+      body: TabBarView(
 
         // Add tabs as widgets
-        children: <Widget>[new LoadNetWork(), new SecondTab(), new ThirdTab(),new FourTab(),new FiveTab()],
+        children: <Widget>[
+          LoadNetWork(), FirstTab(), ThirdTab(), FourTab(), FiveTab()],
         // set the controller
         controller: controller,
       ),
@@ -72,30 +73,30 @@ class MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin {
       /**
        * 底部导航栏bottomNavigationBar
        */
-      bottomNavigationBar: new Material(
+      bottomNavigationBar: Material(
         // set the color of the bottom navigation bar
         color: Colors.teal,
         // set the tab bar as the child of bottom navigation bar
-        child: new TabBar(
+        child: TabBar(
           tabs: <Tab>[
-            new Tab(
+            Tab(
               // set icon to the tab
-              icon: new Icon(Icons.favorite),
+              icon: Icon(Icons.favorite),
             ),
-            new Tab(
-              icon: new Icon(Icons.adb),
+            Tab(
+              icon: Icon(Icons.adb),
             ),
-            new Tab(
-              icon: new Icon(Icons.airport_shuttle),
+            Tab(
+              icon: Icon(Icons.airport_shuttle),
 
             ),
-            new Tab(
+            Tab(
               // set icon to the tab
-              icon: new Icon(Icons.zoom_in),
+              icon: Icon(Icons.zoom_in),
             ),
-            new Tab(
+            Tab(
               // set icon to the tab
-              icon: new Icon(Icons.access_alarms),
+              icon: Icon(Icons.access_alarms),
             ),
           ],
           // setup the controller
