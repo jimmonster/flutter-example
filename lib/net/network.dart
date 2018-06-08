@@ -36,9 +36,8 @@ class LoadNetWork extends StatelessWidget {
       ),
     );
   }
-
 }
-
+var index=0;
 class InitView extends StatelessWidget {
   //通过构造方法获取到传递过来的数据
   Post data;
@@ -49,32 +48,55 @@ class InitView extends StatelessWidget {
   Widget build(BuildContext context) {
     var id = data.error_code.toString();
     var reason = data.reason;
-    final info = data.result.toString();
+    List<dynamic> info = data.result;
 
+
+    var _isflag=true;
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: ListView(
-        children: <Widget>[
+        backgroundColor: Colors.white,
+        body: Container(
+          margin: new EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
+          color: Colors.lightGreenAccent,
+          child: new ListView(
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  Text(
+                    info[index]['title'],
+                  ),
+                  Text(info[index]['des']),
+                  new Image.network(
+                    info[index]['pic'],
+                    height: 200.0,
+                  )
+                ],
+              ),
 
-          Text("状态码:" + id,
-            style: TextStyle(fontSize: 32.0, color: Colors.orange),),
-          Text("状态信息:" + reason,
-            style: TextStyle(fontSize: 32.0, color: Colors.redAccent),),
-          Text("单条数据集合：" + info,
-            style: TextStyle(fontSize: 22.0, color: Colors.lightGreen),),
-          Text("所有数据集合：" + data.result.toString(),
-            style: TextStyle(color: Colors.blueGrey),),
+//              IconButton(
+//                 icon: (_isflag ? new Icon(Icons.add_circle_outline)
+//                  : new Icon(Icons.add_circle)),
+//                  color: Colors.red[500],
+//                  onPressed: _num()),
 
-        ],
-      ),
 
-    );
+              new FloatingActionButton(onPressed: _addNum())
+
+            ],
+          ),
+        ));
   }
 
 
 }
 
-final String urlPath = "http://api.juheapi.com/japi/toh?key=8adb5f3b5ff1ff5631254bce266ab1b7&v=1.0&month=11&day=1";
+_addNum() {
+  print("index:"+index.toString());
+  index++;
+  Notification;
+}
+
+final String urlPath =
+    "http://api.juheapi.com/japi/toh?key=8adb5f3b5ff1ff5631254bce266ab1b7&v=1.0&month=11&day=1";
 //取出post请求
 Future<Post> fetchPost() async {
   final response = await http.get(urlPath);
@@ -82,12 +104,12 @@ Future<Post> fetchPost() async {
 
   return Post.fromJson(responseJson);
 }
+
 // bean
 class Post {
   final int error_code;
   final String reason;
   final List result;
-
 
   Post({this.error_code, this.reason, this.result});
 
@@ -98,5 +120,4 @@ class Post {
       result: json['result'],
     );
   }
-
 }
