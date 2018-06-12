@@ -3,7 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class LoadNetWork extends StatelessWidget {
+class LoadNetWork extends StatefulWidget {
+  _NetworkState createState() => new _NetworkState();
+}
+
+class _NetworkState extends State<LoadNetWork> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,7 +31,6 @@ class LoadNetWork extends StatelessWidget {
                 //获取数据失败
                 return Text("${snapshot.error}");
               }
-
               // 默认显示进度条
               return CircularProgressIndicator();
             },
@@ -37,7 +40,15 @@ class LoadNetWork extends StatelessWidget {
     );
   }
 }
-var index=0;
+
+var index = 0;
+
+_addNum() {
+  print("index:" + index.toString());
+  index++;
+//  LayoutChangedNotification;//刷新页面
+}
+
 class InitView extends StatelessWidget {
   //通过构造方法获取到传递过来的数据
   Post data;
@@ -46,17 +57,13 @@ class InitView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var id = data.error_code.toString();
-    var reason = data.reason;
     List<dynamic> info = data.result;
 
-
-    var _isflag=true;
     return Scaffold(
         backgroundColor: Colors.white,
         body: Container(
           margin: new EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
-          color: Colors.lightGreenAccent,
+          //color: Colors.lightGreenAccent,
           child: new ListView(
             children: <Widget>[
               Column(
@@ -68,7 +75,7 @@ class InitView extends StatelessWidget {
                   new Image.network(
                     info[index]['pic'],
                     height: 200.0,
-                  )
+                  ),
                 ],
               ),
 
@@ -78,21 +85,38 @@ class InitView extends StatelessWidget {
 //                  color: Colors.red[500],
 //                  onPressed: _num()),
 
+              /*  new CustomScrollView(
+                shrinkWrap: true,
+                slivers: <Widget>[
+                  new SliverPadding(
+                    padding: const EdgeInsets.all(20.0),
+                    sliver: new SliverList(
+                      delegate: new SliverChildListDelegate(
+                        <Widget>[
+                          const Text('I\'m dedicating every day to you'),
+                          const Text('Domestic life was never quite my style'),
+                          const Text('When you smile, you knock me out, I fall apart'),
+                          const Text('And I thought I was so smart'),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+*/
+              Text(
+                "当前的索引：" + "${index}",
+                textDirection: TextDirection.rtl,
+              ),
 
-              new FloatingActionButton(onPressed: _addNum())
-
+              new FloatingActionButton(
+                  isExtended: true,
+                  backgroundColor: Colors.lightGreenAccent,
+                  onPressed: _addNum),
             ],
           ),
         ));
   }
-
-
-}
-
-_addNum() {
-  print("index:"+index.toString());
-  index++;
-  Notification;
 }
 
 final String urlPath =
