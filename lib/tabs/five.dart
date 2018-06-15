@@ -19,6 +19,14 @@ class _FiveTabState extends State<FiveTab> {
    });
 
  }
+ _subNum(){
+   setState(() {
+     if(index>0){
+     index--;
+     }
+   });
+
+ }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,22 +39,55 @@ class _FiveTabState extends State<FiveTab> {
         child: new FutureBuilder<BliBean>(
             future: initData(),
             builder: (context, response) {
-              return ListView(
-                children: <Widget>[
-                  new Image.network(response.data.data[index].cover.src),
-                  new Image.network(response.data.data[index].owner.face),
-                  new MaterialButton(
+               int length = response.data.data.length;
+               var src = response.data.data[index].cover.src;
+               var face = response.data.data[index].owner.face;
+               double width = response.data.data[index].cover.width .toDouble();
+                double height = response.data.data[index].cover.height .toDouble();
+               if(index>=length){
+                 index=0;
+               }
+              if(response.hasData){
+                return ListView(
+                  children: <Widget>[
+                    new Image.network(src,width: width,height: height,),
+                    new Image.network(face),
 
-                      child: Text('下一张'),
-                      onPressed: _addNum,
-                    color: Colors.pinkAccent,
+                   new Row(
+               children: <Widget>[
+                 new MaterialButton(
+
+                   child: Text('上一张'),
+                   onPressed: _subNum,
+                   color: Colors.pinkAccent,
 
 
-                  ),
+                 ),
+
+                 new MaterialButton(
+
+                   child: Text('下一张'),
+                   onPressed: _addNum,
+                   color: Colors.pinkAccent,
 
 
-                ],
-              );
+                 ),
+
+               ],
+
+                   ),
+
+
+                  ],
+                );
+
+              }else if(response.hasError){
+                return Text('获取数据失败${response.error}');
+
+              }else{
+                return CircularProgressIndicator();
+              }
+
 
 //              if(data.hasData){
 //                print(data.data.data[0].toString());
