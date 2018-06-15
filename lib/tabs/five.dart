@@ -5,13 +5,9 @@ import 'package:flutter_net/net/url/UrlPath.dart';
 import 'package:http/http.dart' as http;
 
 class FiveTab extends StatefulWidget {
-  String get src =>
-      "http://api.live.bilibili.com//mobile/rooms?platform=android";
 
-  @override
-  State<StatefulWidget> createState() {
     _FiveTabState createState() => _FiveTabState();
-  }
+
 }
 
 class _FiveTabState extends State<FiveTab> {
@@ -25,10 +21,12 @@ class _FiveTabState extends State<FiveTab> {
       ),
       body: Center(
         child: new FutureBuilder<BliBean>(
-            future: initData(), builder: (context, data) {
+            future: initData(),
+            builder: (context, data) {
 
               if(data.hasData){
-                return Text('获取到真实的数据'+data.data.data[0][0]);
+                print(data.data.data[0].toString());
+                return Text('获取到真实的数据'+data.data.data[0]);
               }
               else if(data.hasError){
                 return Text('数据获取失败');
@@ -46,11 +44,12 @@ class _FiveTabState extends State<FiveTab> {
   }
 }
 
-/**
- * 加载网络数据
- */
+/// 加载网络数据
 Future<BliBean> initData() async {
-  var response = await http.get(UrlPath.FIRSTURL);
+  String  src =
+  "http://api.live.bilibili.com//mobile/rooms?platform=android";
+
+  var response = await http.get(src);
   print("获取的数据：" + response.body.toString());
   Map decode = json.decode(response.body);
 
@@ -59,8 +58,8 @@ Future<BliBean> initData() async {
 }
 
 class BliBean {
-  var code;
-  var message;
+  String code;
+  String message;
   List data;
 
 
