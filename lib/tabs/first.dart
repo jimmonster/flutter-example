@@ -91,7 +91,7 @@ class Bean {
 
   Bean({this.error_code, this.reason, this.result});
 
-  factory Bean.forjson(Map<String, dynamic> json) {
+  factory Bean.forjson(Map json) {
     //将解析完成的数据返回
     return Bean(
       error_code: json['error_code'],
