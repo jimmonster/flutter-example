@@ -77,17 +77,8 @@ class MainTabBarView  extends StatelessWidget{
            Text('主页数据'),
            Text('主页数据'),
            Text('主页数据'),
-           Text('主页数据'),
-           Text('主页数据'),
-           Text('主页数据'),
-           Text('主页数据'),
-           Text('主页数据'),
-           Text('主页数据'),
-           Text('主页数据'),
-           Text('主页数据'),
-           Text('主页数据'),
+           TestView(),
            new Image.network('http://p1.qhimgs4.com/t01b9eb4b9ccbb3e84e.webp',height: 200.0,)
-
 
 
          ],
@@ -103,6 +94,12 @@ class MainTabBarView  extends StatelessWidget{
 
 
 
+  }
+
+
+  Widget TestView(){
+  //listView 不能嵌套listView
+  return Text('自定义的视图');
   }
 
 

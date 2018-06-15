@@ -8,9 +8,9 @@ import 'package:flutter_net/tabs/third.dart';
 import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
 
 void main() {
-  debugPaintSizeEnabled = false;      //打开视觉调试开关
+  debugPaintSizeEnabled = false; //打开视觉调试开关
   runApp(MaterialApp(
-    // Title
+      // Title
       title: "Using Tabs",
       // Home
       home: MyHome()));
@@ -25,7 +25,6 @@ class MyHome extends StatefulWidget {
 class MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin {
   // Create a tab controller
   TabController controller;
-
 
   @override
   void initState() {
@@ -64,10 +63,14 @@ class MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin {
       // Set the TabBar view as the body of the Scaffold
 
       body: TabBarView(
-
         // Add tabs as widgets
         children: <Widget>[
-           FirstTab(),SecondTab(), ThirdTab(), FourTab(), FiveTab()],
+          FirstTab(),
+          SecondTab(),
+          ThirdTab(),
+          FourTab(),
+          FiveTab()
+        ],
         // set the controller
         controller: controller,
       ),
@@ -90,7 +93,6 @@ class MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin {
             ),
             Tab(
               icon: Icon(Icons.airport_shuttle),
-
             ),
             Tab(
               // set icon to the tab
