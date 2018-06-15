@@ -67,7 +67,7 @@ class MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin {
 
         // Add tabs as widgets
         children: <Widget>[
-          LoadNetWork(), FirstTab(), ThirdTab(), FourTab(), FiveTab()],
+           FirstTab(),SecondTab(), ThirdTab(), FourTab(), FiveTab()],
         // set the controller
         controller: controller,
       ),

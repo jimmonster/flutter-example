@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_net/net/url/UrlPath.dart';
 import 'package:http/http.dart' as http;
 
 class LoadNetWork extends StatefulWidget {
@@ -76,6 +77,8 @@ class InitView extends StatelessWidget {
                     info[index]['pic'],
                     height: 200.0,
                   ),
+
+
                 ],
               ),
 
@@ -123,7 +126,7 @@ final String urlPath =
     "http://api.juheapi.com/japi/toh?key=8adb5f3b5ff1ff5631254bce266ab1b7&v=1.0&month=11&day=1";
 //取出post请求
 Future<Post> fetchPost() async {
-  final response = await http.get(urlPath);
+  final response = await http.get(UrlPath.FIRSTURL);
   final responseJson = json.decode(response.body);
 
   return Post.fromJson(responseJson);

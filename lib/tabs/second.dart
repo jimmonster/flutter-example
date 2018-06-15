@@ -1,29 +1,145 @@
 import 'package:flutter/material.dart';
 
-class SecondTab extends StatelessWidget {
+class SecondTab extends StatefulWidget {
+  _SecondTabState createState() => _SecondTabState();
+}
+
+class _SecondTabState extends State<SecondTab> with SingleTickerProviderStateMixin{
+  TabController tabController;
+  @override
+  void initState() {
+
+    tabController=TabController(initialIndex: 0,length:2,vsync: this);
+
+  }
+  @override
+  void dispose() {
+    // Dispose of the Tab Controller
+    tabController.dispose();
+    super.dispose();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      backgroundColor: Colors.green,
-      body: new Container(
-        child: new Center(
-          child: new Column(
-            // center the children
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              new Icon(
-                Icons.adb,
-                size: 300.0,
-                color: Colors.white,
-              ),
-              new Text(
-                "第二个页面",
-                style: new TextStyle(color: Colors.white),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
+
+     return Scaffold(
+       appBar: AppBar(
+
+//         title: Text('新闻页面的简单实现'),
+//         centerTitle: true,
+       backgroundColor: Colors.deepOrange,
+           title: new TabBar(
+             indicatorColor: Colors.yellowAccent,//指示器颜色
+             labelColor: Colors.purple,//字体颜色
+
+             isScrollable: false,
+             controller: tabController,
+             tabs: <Tab>[
+               Tab(
+                 text: '主页',
+               //  icon: Icon(Icons.battery_full),
+               ),
+               Tab(
+                 text: '新闻',
+               //  icon: Icon(Icons.assignment),
+               )
+
+
+             ])
+       ),
+
+       body: new TabBarView(
+           controller: tabController,
+           children: <Widget>[
+             new MainTabBarView(),
+             new NewsTabBarView(),
+           ]),
+
+
+     );
   }
+
+
 }
+/**
+ * 主页
+ */
+class MainTabBarView  extends StatelessWidget{
+
+  @override
+  Widget build(BuildContext context) {
+   return Scaffold(
+     body: Center(
+       child: ListView(
+         children: <Widget>[
+           Text('主页数据'),
+           Text('主页数据'),
+           Text('主页数据'),
+           Text('主页数据'),
+           Text('主页数据'),
+           Text('主页数据'),
+           Text('主页数据'),
+           Text('主页数据'),
+           Text('主页数据'),
+           Text('主页数据'),
+           Text('主页数据'),
+           Text('主页数据'),
+           new Image.network('http://p1.qhimgs4.com/t01b9eb4b9ccbb3e84e.webp',height: 200.0,)
+
+
+
+         ],
+       ),
+
+     ),
+
+
+   );
+  }
+
+
+
+
+
+  }
+
+
+
+
+
+
+
+/**
+ * 新闻
+ */
+class NewsTabBarView  extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: ListView(
+          children: <Widget>[
+            Text('新闻数据'),
+            Text('新闻数据'),
+            Text('新闻数据'),
+            Text('新闻数据'),
+            Text('新闻数据'),
+            Text('新闻数据'),
+            Text('新闻数据'),
+            Text('新闻数据'),
+            Text('新闻数据'),
+            Text('新闻数据'),
+            Text('新闻数据'),
+
+          ],
+        ),
+
+      ),
+
+
+
+    );}
+}
+
