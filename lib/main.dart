@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_net/net/network.dart';
 import 'package:flutter_net/tabs/first.dart';
 import 'package:flutter_net/tabs/five.dart';
 import 'package:flutter_net/tabs/four.dart';
